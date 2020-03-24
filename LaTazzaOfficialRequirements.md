@@ -2,22 +2,8 @@
 
 Authors: Maurizio Morisio, Luca Ardito, Riccardo Coppola
 
-Date: 29/05/2019
+Date: 24/03/2020
 
-Version: 5
-
-Change history
-
-| Version | Changes | 
-| ----------------- |:-----------|
-| 2 | Fixed defect in [scenario 2](#scenario-2): precondition was wrong  |
-| | Fixed defect in scenario [format](#relevant-scenarios): added post conditions |
-| | Fixed defect in [use case 2](#use-cases): variants text canceled |
-| 3 | Fixed defect in [use case 3]: recharge only positive|
-| |  Added Non functional requirement NFR5 |
-| 4 | Fixed defect in [use case 3]: post condition is on Colleague account, and LaTazza|
-| | Fixed defect in [use case 1]: post condition is on Colleague account, not LaTazza|
-| 5 | Fized defect in [use case 4]: precondition modified |
 
 # Contents
 - [Abstract](#abstract)
@@ -49,8 +35,8 @@ One of the colleagues, the *hacker*, volunteers to develop a simple applic
 
 | Stakeholder name  | Description | 
 | ----------------- |:-----------:|
-| Administrator     |Uses the application to manage purchase and sharing of capsules in a small office (5-10 people)| 
-| Colleagues        |Do not use the application directly. They are interested in a correct accounting of capsule consumption and payments| 
+| User     |Uses the application to locate gas stations and the prices in an area | 
+| Admin    |Uses the application to add/remove gas station and manage errors | 
 
 # Context Diagram and interfaces
 
@@ -58,28 +44,24 @@ One of the colleagues, the *hacker*, volunteers to develop a simple applic
 
 ```plantuml
 left to right direction
-actor Administrator as a
-a -- (La Tazza)
+actor User as a
+a -- (EZGas)
 ```
 
 ## Interfaces
 | Actor | Logical Interface | Physical Interface  |
 | ------------- |:-------------:| -----:|
-|Administrator|GUI |Screen, keyboard|
+|User|GUI |Touch Screen|
 
 
 # Stories and personas
-John works in the office and has an inclination for order and discipline. So he volunteers to keep track of what happens on the coffee machine. When a capsule of a certain type is close to sold out John reorders. Capsules can be purchased only in multiples of a minimum quantity (ex 40). On the money side, John computes how much each colleague should pay for what she has consumed. In practice every colleague has a virtual account, initially charged with a reasonable amount of cash given to John (ex 10 euros). John maintains this account and asks to recharge it when close to zero. Physically the money for capsules is in cash, and John manages it as if it where his personal money.
+Joseph has few amount of money and want to get the fuel but it is in riserva. He open the application and looking for the nearest gas station with the lowest price and goes there.
 
-All colleagues trust each other, so negative accounts are allowed. John uses his personal money if needed to reorder capsules. 
+Mark is a statistic and want to evalutate the number of gas station for each geographic area to analyse if there are some correlation with the geographical position and how the tecnlogical advantage affect the gas sation distribution. 
 
-John is happy to do this work, but would like to hand over to someone else after a certain amount of time. In any case when he is on vacation another colleague takes over temporarily.
+Mary is a stranger and doen't know anithing of the country, she has a car and she what to get fuel but she down't know the location of gas stations and also the price of the fuel in that country. She uses the app to find the best palce to go.
 
-John would like to have a simple way to report (ex every one or two weeks) to each colleague all expenses and consumption for LaTazza. Without this report nobody has a clear idea of how much was the consumption.
-
-Mary works in the office and likes to share time with her colleagues in front of the coffee machine. On the side of the coffee machine is a tray with capsules. When she wants a coffee (or else) she takes a capsule from the tray and tells to John. To do so she uses a whatsapp group (LaTazza friends).
-
-Mr. Guest is a visitor in the office. As such he does not have the privilege of having an account. In case he can directly pay the capsule, cash, to John.
+Frank find an error in the 
 
 # Functional and non functional requirements
 
@@ -87,24 +69,23 @@ Mr. Guest is a visitor in the office. As such he does not have the privilege of 
 
 | ID        | Description  |
 | ------------- |:-------------:| 
-|  FR1     | Record that a colleague has used n capsules of a certain type, update his account |  
-|  FR2     | Record that a visitor has used n capsules of a certain type |
-|  FR3     | Record that a colleague has recharged x euros on her account |
+|  FR1     | Record new gas station opened |  
+|  FR2     | Record the location of a gas station  |
+|  FR3     | Record price for each type of fuel for a gas station |
 |  FR4     | Record that n capsules of a certain type have been received, and paid for |
-|  FR5     | Produce a report about consumption and recharges of a colleague over a certain period of time |
-|  FR6     | Produce a report about all consumption and recharges over a certain period of time |
-|  FR7     | Manage types of capsules and prices |
-|  FR8     | Manage colleagues and accounts |
-
+|  FR5     | Produce a list/map visualization of all gas station in a choosen area |
+|  FR6     | Produce the indication of each fuel type from a chosen gas station |
+|  FR7     | Manage types fuels |
+|  FR8     | Manage areas of gas stations |
+|  FR9     | Manage closed gas stations |
 ## Non Functional Requirements
 
 | ID        | Type (efficiency, reliability, .. see iso 9126)           | Description  | Refers to |
 | ------------- |:-------------:| :-----:| -----:|
-|  NFR1     | Usability | Application should be used with no training by any colleague in the office  | All FR |
+|  NFR1     | Usability | Application should be intuitive and easy to used for any type of users  | All FR |
 |  NFR2     | Performance | All functions should complete in < 0.5 sec  | All FR |
-|  NFR3     | Portability | The application runs on MS Windows (7 and more recent)  | All FR |
-|  NFR4     | Portability | The application (functions and data) should be portable from a PC to another PC in less than 5 minutes | All FR |
-|  NFR5     | Localisation | Decimal numbers use . (dot) as decimal separator ||
+|  NFR3     | Portability | The application runs on android / iOS (android 5.0 / iOS 6)  | All FR |
+|  NFR4     | Maintainability | Administrator add/remove information from application. The time to do a change should be little ||
 
 
 # Use case diagram and use cases
